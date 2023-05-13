@@ -1,4 +1,4 @@
-import { CONFIG, ConfigService } from '@nestboot/config';
+import { CONFIG, ConfigService } from '@ddboot/config';
 import { HttpModule } from '@nestjs/axios';
 import { Module } from '@nestjs/common';
 import { AgentController } from './agent.controller';

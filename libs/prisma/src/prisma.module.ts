@@ -1,4 +1,4 @@
-import { CONFIG, ConfigService } from '@nestboot/config';
+import { CONFIG, ConfigService } from '@ddboot/config';
 import { DynamicModule, Module } from '@nestjs/common';
 import { PRISMA_CONFIG_KEY, PRISMA_OPTIONS } from './prisma.constant';
 import { PrismaHelper } from './prisma.helper';

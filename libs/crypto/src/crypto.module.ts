@@ -1,4 +1,4 @@
-import { CONFIG, ConfigService } from '@nestboot/config';
+import { CONFIG, ConfigService } from '@ddboot/config';
 import { Module } from '@nestjs/common';
 import {
   CRYPTO_CONFIG_OPTION,

@@ -8,8 +8,8 @@ import { InjectSSH } from '../ssh';
 import { NodeSSH } from 'node-ssh';
 import { AGENT_PORT } from './agent.constant';
 import { HttpService } from '@nestjs/axios';
-import { ILogger, InjectLogger, Logger } from '@nestboot/logger';
-import { ConfigService, InjectConfig } from '@nestboot/config';
+import { ILogger, InjectLogger, Logger } from '@ddboot/log4js';
+import { ConfigService, InjectConfig } from '@ddboot/config';
 
 @Injectable()
 export class AgentService {

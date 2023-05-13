@@ -3,7 +3,7 @@ import { Injectable } from '@nestjs/common';
 import { map } from 'rxjs';
 import { TaskDAO } from './task.dao';
 import { UpdateTaskDTO, TaskDTO, LogDTO } from './task.dto';
-import { ILogger, InjectLogger, Logger } from '@nestboot/logger';
+import { ILogger, InjectLogger, Logger } from '@ddboot/log4js';
 @Injectable()
 export class TaskService {
   private log: Logger;

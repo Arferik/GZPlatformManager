@@ -23,6 +23,8 @@
     "lint-staged": "lint-staged"
   },
   "dependencies": {
+    "@ddboot/config": "^1.1.1",
+    "@ddboot/log4js": "^1.1.1",
     "@nestjs/axios": "^1.0.1",
     "@nestjs/common": "^9.0.0",
     "@nestjs/config": "^2.2.0",
@@ -99,9 +101,7 @@
     ],
     "moduleNameMapper": {
       "^@nestboot/common(|/.*)$": "<rootDir>/libs/common/src/$1",
-      "^@nestboot/logger(|/.*)$": "<rootDir>/libs/logger/src/$1",
       "^@nestboot/crypto(|/.*)$": "<rootDir>/libs/crypto/src/$1",
-      "^@nestboot/config(|/.*)$": "<rootDir>/libs/config/src/$1",
       "^@nestboot/prisma(|/.*)$": "<rootDir>/libs/prisma/src/$1",
       "^@nestboot/core(|/.*)$": "<rootDir>/libs/core/src/$1"
     }

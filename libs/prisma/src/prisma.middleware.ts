@@ -1,4 +1,4 @@
-import { Logger } from '@nestboot/logger';
+import { Logger } from '@ddboot/log4js';
 
 export const PrismaUpdateOptionMiddleware = async (params, next) => {
   const { action, args } = params;

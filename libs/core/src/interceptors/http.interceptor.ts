@@ -7,7 +7,7 @@ import {
   CallHandler,
   ExecutionContext,
 } from '@nestjs/common';
-import { NestLoggerService } from '@nestboot/logger';
+import { NestLoggerService } from '@ddboot/log4js';
 
 @Injectable()
 export class HttpInterceptor implements NestInterceptor {

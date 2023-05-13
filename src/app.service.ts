@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Logger, InjectLogger, ILogger } from '@nestboot/logger';
+import { Logger, InjectLogger, ILogger } from '@ddboot/log4js';
 import { CryptoService } from '@nestboot/crypto';
 @Injectable()
 export class AppService {

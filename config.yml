@@ -9,6 +9,8 @@ data:
 log:
   level: debug
   path: logs
+  name: platform
+  console: true
 axios:
   timeout: 5000
   maxRedirects: 5

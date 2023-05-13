@@ -1,4 +1,4 @@
-import { NestLoggerService } from '@nestboot/logger';
+import { NestLoggerService } from '@ddboot/log4js';
 import { INestApplication, Module, ValidationPipe } from '@nestjs/common';
 import { CoreService } from './core.service';
 import { HttpExceptionFilter } from './filters/error.filter';

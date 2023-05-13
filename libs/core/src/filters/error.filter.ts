@@ -1,4 +1,4 @@
-import { NestLoggerService } from '@nestboot/logger';
+import { NestLoggerService } from '@ddboot/log4js';
 import {
   ArgumentsHost,
   Catch,

@@ -1,5 +1,4 @@
-import { Database } from '@nestboot/config';
-import { ILogger, InjectLogger, Logger } from '@nestboot/logger';
+import { ILogger, InjectLogger, Logger } from '@ddboot/log4js';
 import {
   INestApplication,
   Inject,
@@ -23,18 +22,23 @@ export class PrismaService
   private logListFlag: boolean;
 
   constructor(
-    @Inject(PRISMA_OPTIONS) private readonly database: Database,
+    @Inject(PRISMA_OPTIONS) private readonly database: any,
     @InjectLogger() private readonly logger: ILogger,
   ) {
     super({
       log: [{ emit: 'event', level: 'query' }],
       errorFormat: 'colorless',
     });
+
     this.LOG = this.logger.getLogger(PrismaService.name);
+    this.initDataBase();
+  }
+
+  async initDataBase() {
+    process.env.DATABASE_URL = await this.generateDatabaseUrl(this.database);
   }
 
   async onModuleInit() {
-    process.env.DATABASE_URL = await this.generateDatabaseUrl(this.database);
     this.LOG.debug('db connect url =', process.env.DATABASE_URL);
     await this.$connect();
     const performanceMiddleware = PrismaPerformance(this.LOG);
@@ -49,7 +53,7 @@ export class PrismaService
     });
   }
 
-  async generateDatabaseUrl(dataBase: Database) {
+  async generateDatabaseUrl(dataBase: any) {
     const { host, user, password, type, port, database } = dataBase;
     if (type === 'postgresql') {
       return `postgresql://${user}:${password}@${host}:${port}/${database}?schema=public`;

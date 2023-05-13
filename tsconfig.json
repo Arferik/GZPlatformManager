@@ -27,23 +27,11 @@
       "@nestboot/common/*": [
         "libs/common/src/*"
       ],
-      "@nestboot/logger": [
-        "libs/logger/src"
-      ],
-      "@nestboot/logger/*": [
-        "libs/logger/src/*"
-      ],
       "@nestboot/crypto": [
         "libs/crypto/src"
       ],
       "@nestboot/crypto/*": [
         "libs/crypto/src/*"
-      ],
-      "@nestboot/config": [
-        "libs/config/src"
-      ],
-      "@nestboot/config/*": [
-        "libs/config/src/*"
       ],
       "@nestboot/prisma": [
         "libs/prisma/src"
