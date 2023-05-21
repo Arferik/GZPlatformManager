@@ -29,6 +29,7 @@
     "@nestjs/common": "^9.0.0",
     "@nestjs/config": "^2.2.0",
     "@nestjs/core": "^9.0.0",
+    "@nestjs/jwt": "^10.0.3",
     "@nestjs/platform-express": "^9.0.0",
     "@nestjs/schedule": "^2.1.0",
     "@prisma/client": "^4.9.0",
@@ -100,8 +101,6 @@
       "<rootDir>/libs/"
     ],
     "moduleNameMapper": {
-      "^@nestboot/common(|/.*)$": "<rootDir>/libs/common/src/$1",
-      "^@nestboot/crypto(|/.*)$": "<rootDir>/libs/crypto/src/$1",
       "^@nestboot/prisma(|/.*)$": "<rootDir>/libs/prisma/src/$1",
       "^@nestboot/core(|/.*)$": "<rootDir>/libs/core/src/$1"
     }

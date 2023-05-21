@@ -10,7 +10,7 @@ export const PrismaUpdateOptionMiddleware = async (params, next) => {
   return result;
 };
 
-export const PrismaPerformance = (log: Logger) => {
+export const PrismaPerformanceLogMiddleware = (log: Logger) => {
   return async (params, next) => {
     const before = Date.now();
     const result = await next(params);

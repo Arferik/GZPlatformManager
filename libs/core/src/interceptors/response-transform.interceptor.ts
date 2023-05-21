@@ -5,22 +5,21 @@ import {
   NestInterceptor,
 } from '@nestjs/common';
 import { map, Observable } from 'rxjs';
-
+import {
+  HTTP_SUCCESS_MESSAGE,
+  USE_PAGINATION,
+} from '../constant/http.constant';
 import {
   HttpResponsePagination,
   HttpResponseSuccess,
-} from './http-response.interface';
-import {
-  getDecoratorValue,
-  HTTP_SUCCESS_MESSAGE,
-  USER_PAGINATION,
-} from '@nestboot/common';
+} from '../interfaces/http-response.interface';
+import { getDecoratorValue } from '../utils';
 
 /**
  * 请求成功转换器
  */
 @Injectable()
-export class TransformInterceptor<T>
+export class ResponseTransformInterceptor<T>
   implements
     NestInterceptor<T, T | HttpResponseSuccess<T> | HttpResponsePagination<T>>
 {
@@ -31,14 +30,13 @@ export class TransformInterceptor<T>
     const call$ = next.handle();
     const target = context.getHandler();
     const successMessage = getDecoratorValue(HTTP_SUCCESS_MESSAGE, target);
-    const usePaginate = getDecoratorValue(USER_PAGINATION, target);
+    const usePaginate = getDecoratorValue(USE_PAGINATION, target);
 
-    return call$.pipe(
+    return call$.pipe<T>(
       map((data: any) => {
         const result = usePaginate
           ? {
               data: data.data,
-              success: true,
               total: data.total,
               pageSize: data.pageSize,
               pageNumber: data.pageNumber,
@@ -46,8 +44,8 @@ export class TransformInterceptor<T>
           : data;
 
         return {
-          message: successMessage || 'request succeed',
-          code: '',
+          message: successMessage || 'successful request',
+          code: '0000',
           ...result,
         };
       }),

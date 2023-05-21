@@ -1,25 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { Logger, InjectLogger, ILogger } from '@ddboot/log4js';
-import { CryptoService } from '@nestboot/crypto';
+import { BaseException } from './exceptions/base.exception';
 @Injectable()
 export class AppService {
   private logger: Logger;
 
-  constructor(
-    @InjectLogger() log: ILogger,
-    private cryptoService: CryptoService,
-  ) {
+  constructor(@InjectLogger() log: ILogger) {
     this.logger = log.getLogger(AppService.name);
   }
 
   async getHello() {
-    this.logger.info(
-      'getHello',
-      await this.cryptoService.encryptedPbkdf2('sss'),
-    );
-    return {
-      name: 'name',
-      version: 'version',
-    };
+    throw new BaseException('A1s000');
   }
 }

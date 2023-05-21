@@ -1,11 +1,11 @@
 import {
-  createDecorator,
   HTTP_SUCCESS_MESSAGE,
-  USER_PAGINATION,
-} from '@nestboot/common';
+  USE_PAGINATION,
+} from '../constant/http.constant';
+import { createDecorator } from '../utils';
 
 export const Pagination = () =>
-  createDecorator(USER_PAGINATION, { usePaginate: true });
+  createDecorator(USE_PAGINATION, { usePaginate: true });
 
 export const Message = (message: string) =>
   createDecorator(HTTP_SUCCESS_MESSAGE, message);

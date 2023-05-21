@@ -26,7 +26,10 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const exceptionStatus = exception.getStatus
       ? exception?.getStatus()
       : HttpStatus.INTERNAL_SERVER_ERROR;
-
+    console.error(
+      'exceptionStatus is ' + exceptionStatus,
+      'HttpExceptionFilter',
+    );
     const errorResponse = exception.getResponse
       ? (exception.getResponse() as ExceptionInfo)
       : '';
@@ -43,7 +46,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
       code:
         errorInfo?.message ||
         (isString(errorInfo) ? errorInfo : JSON.stringify(errorInfo)),
-      debug: errorInfo?.stack || exception.stack,
+      stack: errorInfo?.stack || exception.stack,
     };
 
     // default 404

@@ -7,3 +7,10 @@ export interface DecoratorCreatorOption {
   successMessage?: string;
   usePaginate?: boolean;
 }
+
+export interface PaginationResult<T> {
+  data: T[];
+  total: number;
+  pageSize: number;
+  pageNumber: number;
+}

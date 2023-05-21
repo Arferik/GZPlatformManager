@@ -10,7 +10,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-//枚举所有的状态
+// 枚举所有的状态
 enum Status {
   INIT
   PUSH_AGENT
@@ -83,4 +83,12 @@ model Log {
   task_id   String?   @map("task_id")
 
   @@map("t_punk_log")
+}
+
+model User {
+  id       String @id @default(cuid())
+  username String
+  password String
+
+  @@map("t_cyber_user")
 }

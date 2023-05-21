@@ -21,18 +21,6 @@
       "~/*": [
         "./src/*"
       ],
-      "@nestboot/common": [
-        "libs/common/src"
-      ],
-      "@nestboot/common/*": [
-        "libs/common/src/*"
-      ],
-      "@nestboot/crypto": [
-        "libs/crypto/src"
-      ],
-      "@nestboot/crypto/*": [
-        "libs/crypto/src/*"
-      ],
       "@nestboot/prisma": [
         "libs/prisma/src"
       ],

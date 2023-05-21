@@ -1,13 +1,12 @@
 import { NestLoggerService } from '@ddboot/log4js';
 import { INestApplication, Module, ValidationPipe } from '@nestjs/common';
-import { CoreService } from './core.service';
 import { HttpExceptionFilter } from './filters/error.filter';
-import { HttpInterceptor } from './interceptors/http.interceptor';
-import { TransformInterceptor } from './interceptors/transform.interceptor';
+import { ResponseTransformInterceptor } from './interceptors/response-transform.interceptor';
+import { HttpLoggerInterceptor } from './interceptors/http-logger.interceptor';
 
 @Module({
-  providers: [CoreService],
-  exports: [CoreService],
+  providers: [],
+  exports: [],
 })
 export class NestBootFactory {
   static create(app: INestApplication): INestApplication {
@@ -15,8 +14,8 @@ export class NestBootFactory {
     app.useLogger(log4jService);
     app.useGlobalPipes(new ValidationPipe());
     app.useGlobalInterceptors(
-      new TransformInterceptor(),
-      new HttpInterceptor(log4jService),
+      new ResponseTransformInterceptor(),
+      new HttpLoggerInterceptor(log4jService),
     );
     app.useGlobalFilters(new HttpExceptionFilter(log4jService));
     return app;

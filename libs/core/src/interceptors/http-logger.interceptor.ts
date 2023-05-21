@@ -10,7 +10,7 @@ import {
 import { NestLoggerService } from '@ddboot/log4js';
 
 @Injectable()
-export class HttpInterceptor implements NestInterceptor {
+export class HttpLoggerInterceptor implements NestInterceptor {
   constructor(private log: NestLoggerService) {}
 
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {

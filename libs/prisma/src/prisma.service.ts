@@ -7,7 +7,7 @@ import {
 } from '@nestjs/common';
 import { Prisma, PrismaClient } from '@prisma/client';
 import {
-  PrismaPerformance,
+  PrismaPerformanceLogMiddleware,
   PrismaUpdateOptionMiddleware,
 } from './prisma.middleware';
 import { PRISMA_OPTIONS } from './prisma.constant';
@@ -17,7 +17,7 @@ export class PrismaService
   extends PrismaClient<Prisma.PrismaClientOptions, 'query' | 'error'>
   implements OnModuleInit
 {
-  private LOG: Logger;
+  private readonly LOG: Logger;
   private logList: any;
   private logListFlag: boolean;
 
@@ -34,14 +34,14 @@ export class PrismaService
     this.initDataBase();
   }
 
-  async initDataBase() {
-    process.env.DATABASE_URL = await this.generateDatabaseUrl(this.database);
+  initDataBase() {
+    process.env.DATABASE_URL = this.generateDatabaseUrl(this.database);
   }
 
   async onModuleInit() {
     this.LOG.debug('db connect url =', process.env.DATABASE_URL);
     await this.$connect();
-    const performanceMiddleware = PrismaPerformance(this.LOG);
+    const performanceMiddleware = PrismaPerformanceLogMiddleware(this.LOG);
     this.$use(PrismaUpdateOptionMiddleware);
     this.$use(performanceMiddleware);
     this.$on('query', this.toLogger);
@@ -53,7 +53,7 @@ export class PrismaService
     });
   }
 
-  async generateDatabaseUrl(dataBase: any) {
+  generateDatabaseUrl(dataBase: any) {
     const { host, user, password, type, port, database } = dataBase;
     if (type === 'postgresql') {
       return `postgresql://${user}:${password}@${host}:${port}/${database}?schema=public`;
