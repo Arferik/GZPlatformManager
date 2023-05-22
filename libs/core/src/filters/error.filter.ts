@@ -1,11 +1,10 @@
-import { NestLoggerService } from '@ddboot/log4js';
 import {
   ArgumentsHost,
   Catch,
-  ExceptionFilter,
   HttpException,
   HttpStatus,
 } from '@nestjs/common';
+import { BaseExceptionFilter } from '@nestjs/core';
 import { isString } from 'lodash';
 import { ExceptionInfo } from '~/interfaces/http-response.interface';
 
@@ -17,19 +16,13 @@ import { ExceptionInfo } from '~/interfaces/http-response.interface';
  * }
  */
 @Catch()
-export class HttpExceptionFilter implements ExceptionFilter {
-  constructor(private log?: NestLoggerService) {}
-
+export class HttpExceptionFilter extends BaseExceptionFilter {
   catch(exception: HttpException, host: ArgumentsHost) {
     const request = host.switchToHttp().getRequest();
     const response = host.switchToHttp().getResponse();
     const exceptionStatus = exception.getStatus
       ? exception?.getStatus()
       : HttpStatus.INTERNAL_SERVER_ERROR;
-    console.error(
-      'exceptionStatus is ' + exceptionStatus,
-      'HttpExceptionFilter',
-    );
     const errorResponse = exception.getResponse
       ? (exception.getResponse() as ExceptionInfo)
       : '';
@@ -37,8 +30,10 @@ export class HttpExceptionFilter implements ExceptionFilter {
       ? errorResponse
       : errorResponse.error_message;
     const errorInfo = isString(errorResponse) ? null : errorResponse.error;
-    this.log.error(
-      'errorResponse is ' + errorResponse,
+    console.error(
+      'errorResponse is ' + isString(errorResponse)
+        ? errorResponse
+        : JSON.stringify(errorResponse),
       HttpExceptionFilter.name,
     );
     const data: any = {
@@ -48,7 +43,6 @@ export class HttpExceptionFilter implements ExceptionFilter {
         (isString(errorInfo) ? errorInfo : JSON.stringify(errorInfo)),
       stack: errorInfo?.stack || exception.stack,
     };
-
     // default 404
     if (exceptionStatus === HttpStatus.NOT_FOUND) {
       data.error = data.error || `Not found`;
@@ -56,6 +50,6 @@ export class HttpExceptionFilter implements ExceptionFilter {
         data.message || `Invalid API: ${request.method} > ${request.url}`;
     }
 
-    return response.status(errorInfo?.status || exceptionStatus).jsonp(data);
+    return response.status(errorInfo?.status || exceptionStatus).json(data);
   }
 }

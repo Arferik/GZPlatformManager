@@ -88,6 +88,16 @@ export function toObject<T>(jsonStr: string) {
   return result;
 }
 
+export function toJSON(jsonStr: string) {
+  let result;
+  try {
+    result = JSON.stringify(jsonStr);
+  } catch (e) {
+    result = '';
+  }
+  return result;
+}
+
 export const byteHelper = function (value) {
   if (value === 0) {
     return '0 b';

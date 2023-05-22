@@ -11,6 +11,7 @@ import { ErrorCode } from './base.code';
 export class BaseErrorExceptionFilter extends BaseExceptionFilter {
   catch(exception: BaseException, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
+    console.error('BaseErrorExceptionFilter enter');
     const response = ctx.getResponse<Response>();
     if (ErrorCode[exception.message]) {
       const message = ErrorCode[exception.message];

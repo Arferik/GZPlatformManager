@@ -21,16 +21,16 @@
       "~/*": [
         "./src/*"
       ],
-      "@nestboot/prisma": [
+      "@ddboot/prisma": [
         "libs/prisma/src"
       ],
-      "@nestboot/prisma/*": [
+      "@ddboot/prisma/*": [
         "libs/prisma/src/*"
       ],
-      "@nestboot/core": [
+      "@ddboot/core": [
         "libs/core/src"
       ],
-      "@nestboot/core/*": [
+      "@ddboot/core/*": [
         "libs/core/src/*"
       ]
     }

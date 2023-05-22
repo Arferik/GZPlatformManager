@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from '@nestboot/prisma';
+import { PrismaService } from '@ddboot/prisma';
 import { from } from 'rxjs';
 
 @Injectable()
@@ -11,6 +11,17 @@ export class UserDao {
       this.prismaService.user.findFirst({
         where: {
           username: name,
+        },
+      }),
+    );
+  }
+
+  createUser$(name: string, password: string) {
+    return from(
+      this.prismaService.user.create({
+        data: {
+          username: name,
+          password: password,
         },
       }),
     );

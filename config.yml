@@ -23,3 +23,6 @@ database:
   database: at_platform
 crypto:
   pbk: '222'
+jwt:
+  key: qzBra0aKNgqxL6mmCtH7IxJXd9I/diT7+OEgh9eziYk=
+  expired: 3600

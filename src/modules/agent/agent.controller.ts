@@ -1,4 +1,4 @@
-import { Message, Pagination } from '@nestboot/core';
+import { Message, Pagination } from '@ddboot/core';
 import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { QueryParam } from '~/models/queryParam.dto';
 import { AgentDTO, AgentIdDTO, PrepareDTO, TestConnectDTO } from './agent.dto';

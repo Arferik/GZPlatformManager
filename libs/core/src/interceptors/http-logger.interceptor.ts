@@ -8,6 +8,7 @@ import {
   ExecutionContext,
 } from '@nestjs/common';
 import { NestLoggerService } from '@ddboot/log4js';
+import { toJSON } from '../utils';
 
 @Injectable()
 export class HttpLoggerInterceptor implements NestInterceptor {
@@ -17,9 +18,12 @@ export class HttpLoggerInterceptor implements NestInterceptor {
     const call$ = next.handle();
     const request = context.switchToHttp().getRequest<Request>();
     const content = `${request.ip} ${request.method} -> ${request.url} `;
-    const requestStart = `${request.ip} ${request.method} <- ${
-      request.url
-    } body: ${JSON.stringify(request.body)}`;
+    //替换password 为 ****
+    const jsonStr = toJSON(request.body).replace(
+      /"password":"(.*)"/g,
+      '"password":"****"',
+    );
+    const requestStart = `${request.ip} ${request.method} <- ${request.url} body: ${jsonStr}`;
     const now = Date.now();
     this.log.log('req: ' + requestStart, 'interface');
     return call$.pipe(

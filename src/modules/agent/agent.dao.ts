@@ -1,4 +1,4 @@
-import { PaginationParam, PrismaHelper, PrismaService } from '@nestboot/prisma';
+import { PaginationParam, PrismaHelper, PrismaService } from '@ddboot/prisma';
 import { Injectable } from '@nestjs/common';
 import { Agent, Status } from '@prisma/client';
 @Injectable()

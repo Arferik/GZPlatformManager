@@ -101,8 +101,8 @@
       "<rootDir>/libs/"
     ],
     "moduleNameMapper": {
-      "^@nestboot/prisma(|/.*)$": "<rootDir>/libs/prisma/src/$1",
-      "^@nestboot/core(|/.*)$": "<rootDir>/libs/core/src/$1"
+      "^@ddboot/prisma(|/.*)$": "<rootDir>/libs/prisma/src/$1",
+      "^@ddboot/core(|/.*)$": "<rootDir>/libs/core/src/$1"
     }
   }
 }

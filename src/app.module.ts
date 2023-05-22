@@ -6,7 +6,10 @@ import { AgentModule } from './modules/agent';
 import { SshModule } from './modules/ssh';
 import { CONFIG, ConfigModule } from '@ddboot/config';
 import { LoggerModule } from '@ddboot/log4js';
-import { PrismaModule } from '@nestboot/prisma';
+import { PrismaModule } from '@ddboot/prisma';
+import { UserModule } from '~/modules/user/user.module';
+import { APP_GUARD } from '@nestjs/core';
+import { AuthGuard } from './guard/auth.guard';
 
 @Module({
   imports: [
@@ -15,6 +18,7 @@ import { PrismaModule } from '@nestboot/prisma';
     LoggerModule.forRootAsync({
       inject: [CONFIG],
     }),
+    UserModule,
     PrismaModule.forRootAsync({
       inject: [CONFIG],
     }),
@@ -25,6 +29,12 @@ import { PrismaModule } from '@nestboot/prisma';
     AgentModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    // {
+    //   provide: APP_GUARD,
+    //   useClass: AuthGuard,
+    // },
+  ],
 })
 export class AppModule {}
